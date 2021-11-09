@@ -56,6 +56,8 @@ public class List<T extends SuperT> {
 				e.printStackTrace();
 				System.exit(0);
 			}
+			current.left = current.right;
+			current.value = null;
 		}
 
 		@Override		 
@@ -86,24 +88,31 @@ public class List<T extends SuperT> {
 
 		@Override
 		public void addLeft(T v) {
-			Element leftNeighbor = current.right;
-			Element rightNeighbor= current;
 			Element newElement = new Element();
 			newElement.value=v;
-			current.right=leftNeighbor;
-			current.left=rightNeighbor;
-			leftNeighbor.left = current;
-			rightNeighbor.right=current;
+			newElement.right=current;
+			newElement.left=current.left;
+			this.goBackward();
 		}
 
 		@Override
-		public void addRight(T v) {}
+		public void addRight(T v) {
+			Element newElement = new Element();
+			newElement.value=v;
+			newElement.right=current.right;
+			newElement.left=current;
+			this.goForward();
+		}
 
 		@Override
-		public void setValue(T v) { }
+		public void setValue(T v) {
+			current.value = v;
+		}
 
 		@Override
-		public void selfDestroy() { }
+		public void selfDestroy() {
+			this.remove();
+		}
 
 		@Override
 		public String toString() {
