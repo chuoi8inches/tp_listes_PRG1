@@ -189,7 +189,6 @@ public class TestMySet {
 		MySet mySet2 = readFileToMySet("f3.ens");
 		mySet1.union(mySet2);
 		int size = mySet1.size();
-		System.out.println(size);
 		assertTrue("size", size == 23);
 	}
 	
